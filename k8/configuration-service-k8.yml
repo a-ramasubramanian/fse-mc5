@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: configuration-service-k8
+  labels:
+    app: configuration-service
+spec:
+  replicas: 0
+  selector:
+    matchLabels:
+      app: configuration-service
+  template:
+    metadata:
+      labels:
+        app: configuration-service
+    spec:
+      containers:
+      - name: configuration-service
+        image: ram711778/springboot-configuration_service:configuration-service
+        ports:
+        - containerPort: 8888
+

@@ -1,0 +1,14 @@
+ sudo docker build -t service-registry .
+
+
+link:https://docs.docker.com/get-started/02_our_app/
+
+sudo docker images
+
+sudo docker tag 076592245871 ram711778/organic-world_01:service-registry
+
+sudo docker push ram711778/organic-world_01
+
+sudo docker run --rm -p 8888:8888 service-registry
+
+

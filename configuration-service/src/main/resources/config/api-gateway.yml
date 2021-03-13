@@ -1,0 +1,45 @@
+server:
+  port: ${SERVER_PORT:8765}
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    serviceUrl:
+      defaultZone: ${EUREKA_URL:http://localhost:8761/eureka/}
+jwt:
+  secret: confidential
+ribbon:
+  ReadTimeout: 60000
+#**TODO**
+# Configure the following zuul routes for the microservices using their service id registered with Eureka
+# The url prefix should not be stripped/removed, when sending request to downstream microservices
+# Service and their corresponding routes are given below
+# product-service - /api/v1/products/**, /admin/**
+# order-service - /api/v1/orders/**
+# user-service - /api/v1/customers/**, /api/v1/users/**, /api/v1/customer/**
+zuul:
+  routes:
+    productservice:
+      serviceId: product-service
+      path: /api/v1/products/**
+      stripPrefix: false
+    orderservice:
+      serviceId: order-service
+      path: /api/v1/orders/**
+      stripPrefix: false
+    userservice_profile:
+      serviceId: user-service
+      path: /api/v1/customers/**
+      stripPrefix: false
+    userservice_register:
+      serviceId: user-service
+      path: /api/v1/customer/**
+      stripPrefix: false
+    userservice_auth:
+      serviceId: user-service
+      path: /api/v1/users/**
+      stripPrefix: false
+    userservice_admin:
+      serviceId: product-service
+      path: /admin/**
+      stripPrefix: false
