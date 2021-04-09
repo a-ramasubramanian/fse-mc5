@@ -1,14 +1,68 @@
- sudo docker build -t service-registry .
+docker login -u ram711778
 
+sudo docker build -t service-registry .
 
 link:https://docs.docker.com/get-started/02_our_app/
 
 sudo docker images
 
-sudo docker tag 076592245871 ram711778/organic-world_01:service-registry
+sudo docker tag 333e35aed6c5 ram711778/springboot-order_service:order_service
 
-sudo docker push ram711778/organic-world_01
+sudo docker push ram711778/springboot-order_service
 
 sudo docker run --rm -p 8888:8888 service-registry
+
+## single file
+kubectl apply -f configuration-service-k8.yml
+
+## all files in folder
+
+kubectl apply -f .
+
+minikube service user-service
+
+rakesh.ranjan@stackroute.in
+
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+
+---eks
+
+aws cli - install
+
+aws configure
+
+eksctl create cluster \
+--name organic-cluster \
+--region us-east-2 \
+--fargate
+
+##set context to aws :
+aws eks --region us-east-2 update-kubeconfig --name organic-cluster
+
+##set context to local :
+kubectl config use-context minikube
+
+to pull and run rabbitmq from docker
+docker run --rm -it --hostname my-rabbit -p 15672:15672 -p 5672:5672 rabbitmq:3-management
+
+to pull and run mysql from docker
+docker run --rm -it --hostname mysql-test -p 3316:3306 -d mysql/mysql-server:5.7
+or
+docker run --rm -it --hostname mysql-test -p 3306:3306 -d mysql/mysql-server:5.7
+
+step 2: docker ps
+step 3: docker logs [containerId]
+step 4: sudo docker exec -it 76796a869703 mysql -u root -p
+step 5: Enter password: GENERATED ROOT PASSWORD: 6ANUlEBWyKv0KIG8ugw@hAr$eMY(generated from step 2 logs)
+step 6: ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';
+step 7: GRANT ALL PRIVILEGES ON *.* to root@'%' IDENTIFIED BY 'root';
+step 8: create database database_name;
+step 9: use database_name;
+step 10: create table employee(empid int not null auto_increment, name varchar(20), primary key(empid));
+step 11: select * from employee;
+step 12: insert into employee (empid,name) values (133,'Ayyappa');
+step 13: select * from employee;
+
+to pull and run mongo from docker
 
 
